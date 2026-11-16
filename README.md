@@ -1,11 +1,11 @@
 # Review 1 — Plan: Shared Python Study Guides
 
-**Team:** Angelo Bustamante and Bryan  
-**Due:** November 17, 2026, 1 p.m. Eastern  
-**Status:** Plan stage — not yet built. No application, local prototype, retrieval index, or demo exists in this repository.  
-**Repository and shared record:** https://github.com/ab2737/Review-1-Plan-Group-Content-System
+**Team:** Angelo Bustamante and Bryan\
+**Due:** November 17, 2026, 1 p.m. Eastern\
+**Status:** Plan stage — not yet built. No application, local prototype, retrieval index, or demo exists in this repository.\
+**Repository and shared record:** [https://github.com/ab2737/Review-1-Plan-Group-Content-System](https://github.com/ab2737/Review-1-Plan-Group-Content-System)
 
-This is the single evolving group record. Proposed responsibilities below are assignments, not claims of completed individual work. Both members still need to review and adopt the plan.
+This is the single evolving group record. Angelo and Bryan have completed their assigned reviews, discussed the findings, and confirmed the finalized plan and section responsibilities.
 
 ## 1. Problem, reader, and bounded scope
 
@@ -24,12 +24,14 @@ A guide will contain a question/title, a short explanation, an original example,
 ### Observations and assumptions
 
 **Observations from the current project:**
+
 - The proposed educational source is the official Python documentation, with its license and reuse conditions recorded in Section 2.
 - The team has two members who can take turns creating and reviewing study guides.
 - The project is currently at the Plan stage; no application, retrieval index, or publishing workflow has been built.
 - G-001 provides one manually traced example, but it does not demonstrate a working ETL or RAG pipeline.
 
 **Assumptions to investigate:**
+
 - Introductory programming students would find short explanations and small examples useful.
 - Retrieving up to three relevant passages will provide enough evidence for most questions in the four selected Python topics.
 - A small vector-based RAG approach will be sufficient for the initial collection.
@@ -39,8 +41,8 @@ These assumptions are not user-research findings. The team will evaluate them du
 
 ## 2. Permitted sources and source records
 
-| Source | Use | Permission/access rule |
-| --- | --- | --- |
+| **Source** | **Use** | **Permission/access rule** |
+|---|---|---|
 | [Python tutorial: Data Structures](https://docs.python.org/3/tutorial/datastructures.html) | Initial educational corpus; select sections on the four scoped topics | Public documentation under the [PSF license](https://docs.python.org/3/license.html); retain required license/copyright notices for redistributed source text and describe modifications. |
 | Team-written examples and explanations | Original guide content | Include only material authored for this project; record its author. |
 | Research references in Section 4 | Architecture decisions | Link and paraphrase for research; not automatically part of the indexed educational corpus. |
@@ -53,8 +55,8 @@ The unversioned Python URL can change. At Build, pin a documentation version and
 
 ## 3. Source-to-transform-to-reviewable-output workflow
 
-| Step | Planned behavior | Reviewable evidence/output |
-| --- | --- | --- |
+| **Step** | **Planned behavior** | **Reviewable evidence/output** |
+|---|---|---|
 | Extract | A contributor manually selects an allowed section and records source metadata. Fetch only approved pages. | Source register entry and source snapshot/hash. |
 | Clean and split | Remove menus/navigation, preserve headings and code blocks, split by section into approximately 200–400-word chunks, and detect duplicates by normalized-text hash. | Chunk records linked to original sections; rejected-duplicate log. |
 | Index and retrieve | Embed permitted chunks and the question; filter by topic/version; rank by cosine similarity and return up to three chunks. | Ranked chunk IDs, scores, source URLs, and model/version. |
@@ -70,8 +72,8 @@ Planned states: **draft → needs review → changes requested → needs review 
 
 References were reviewed during preparation on November 16, 2026. The following summaries are limited to the cited material; the implementation choice is a project judgment, not a measured performance claim.
 
-| ID | Research | Finding and relevance |
-| --- | --- | --- |
+| **ID** | **Research** | **Finding and relevance** |
+|---|---|---|
 | R1 | [Lewis et al., Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401) | RAG combines retrieval from external information with generation. This motivates retrieving source passages before drafting rather than relying only on model memory. It does not guarantee correctness. |
 | R2 | [Sentence Transformers: Semantic Search](https://www.sbert.net/examples/sentence_transformer/applications/semantic-search/README.html) | Semantic search embeds queries and documents and ranks their similarity. Query/document model suitability matters. This supports retrieving a relevant explanation even when a learner uses different wording. |
 | R3 | [Microsoft GraphRAG documentation](https://microsoft.github.io/graphrag/) | GraphRAG extracts entities and relationships and uses graph structures and community summaries. It targets questions requiring connections across information or summaries of broader collections. This introduces extra extraction and review work for our small corpus. |
@@ -80,8 +82,8 @@ References were reviewed during preparation on November 16, 2026. The following 
 
 ### Two approaches compared
 
-| Dimension | A: Vector RAG with metadata and human review | B: Graph-assisted RAG with vector retrieval |
-| --- | --- | --- |
+| **Dimension** | **A: Vector RAG with metadata and human review** | **B: Graph-assisted RAG with vector retrieval** |
+|---|---|---|
 | Retrieval | Similarity-ranked passages, filtered by topic/version | Passages plus concept relationships and graph traversal |
 | Best fit | Focused questions such as how a list method works | Connected questions about concepts and prerequisites across sources |
 | Additional stored data | Chunks, embeddings, provenance, reviews | All of A plus extracted entities, edges, and their evidence |
@@ -99,8 +101,8 @@ A simple keyword search will also be measured as a low-cost retrieval baseline d
 
 ## 5. Four checkable stories and ownership
 
-| ID | User story | Owner | Different reviewer | Acceptance check planned for Build |
-| --- | --- | --- | --- | --- |
+| **ID** | **User story** | **Owner** | **Different reviewer** | **Acceptance check planned for Build** |
+|---|---|---|---|---|
 | S1 | As a contributor, I can add a permitted section so teammates can trace its content. | Angelo | Bryan | A valid entry retains all required source fields; an entry without permission evidence is rejected; importing identical content twice creates no duplicate chunks. |
 | S2 | As a learner, I can request a cited draft so I can inspect its supporting evidence. | Bryan | Angelo | For a supported question, show up to three retrieved chunks and a draft with valid source links; for an unsupported question, report insufficient evidence instead of publishing an answer. |
 | S3 | As a reviewer, I can request changes or approve a particular revision so only checked guides enter the collection. | Angelo | Bryan | Self-approval is rejected; requested changes prevent publication; another person's approval publishes that revision; editing it resets approval. |
@@ -110,8 +112,8 @@ A simple keyword search will also be measured as a low-cost retrieval baseline d
 
 These are future targets, not completed test results.
 
-| Measure | Target | How to check |
-| --- | --- | --- |
+| **Measure** | **Target** | **How to check** |
+|---|---|---|
 | Source traceability | 100% of indexed chunks have valid source ID, section, version, and permission evidence | Inspect all records in the small corpus; attempt one missing-permission import. |
 | Retrieval relevance | At least 8 of 10 supported questions return a reviewer-designated supporting chunk in the top three | Freeze questions and expected sections before tuning; save question, expected IDs, returned IDs, and result for vector and keyword retrieval. |
 | Unsupported questions | All 3 out-of-scope questions remain unpublished and receive an insufficient-evidence response | Test weather, personal grades, and an excluded programming topic. Similarity alone is not an evidence-sufficiency rule. |
@@ -122,8 +124,8 @@ These are future targets, not completed test results.
 At Build, each teammate will author five supported evaluation questions and check the other's expected source labels before tuning. Keep failed cases. At Improve, record a real peer-requested change, its linked revision, and a repeat of the relevant check; no such change or retest has happened yet.
 
 ## Simple review section 4-6 (Angelo Bustamante, 11/16/2026)
-Reviewer: Angelo Bustamante
-Sections reviewed: Approach comparison and evaluation criteria, Sections 4–6.
+
+Reviewer: Angelo Bustamante Sections reviewed: Approach comparison and evaluation criteria, Sections 4–6.
 
 Finding: Vector retrieval fits the small initial Python collection. Comparing it with keyword search will help determine whether the added complexity improves retrieval. The evaluation criteria also address source permissions, unsupported questions, factual accuracy, and independent approval.
 
@@ -131,14 +133,45 @@ Recommended clarification: Explain that the keyword comparison may favor either 
 
 Review outcome: The approach is reasonable for the planned scope. Its effectiveness remains untested until Build.
 
+## Bryan's review of assigned sections (November 16, 2026)
+
+**Reviewer:** Bryan  
+**Review date:** November 16, 2026  
+**Sections reviewed:** Section 4 (research and architecture decisions), Section 5 (user stories S2 and S4), and Section 6 (success criteria).
+
+### Research links and architecture
+
+- **R1 — Lewis et al., RAG paper:** The paper describes combining a language model with information retrieved from an external collection. This supports the project's general plan to retrieve source passages before drafting, but it does not guarantee that the generated study guide will be correct.
+- **R2 — Sentence Transformers semantic search:** The documentation describes embedding queries and documents and ranking them by similarity. This supports the proposed vector retrieval approach, but similarity does not prove that a passage is correct or sufficient.
+- **R3 — Microsoft GraphRAG:** The documentation describes extracting entities and relationships and using graph structures and community summaries. This supports the plan's description of GraphRAG as a more involved approach that may be useful for questions connecting information across sources.
+
+**Architecture finding:** Vector RAG is a reasonable starting point for a small collection of Python tutorial sections and focused questions. Comparing it with keyword search is important because either method could perform better. The team should use the evaluation results rather than assume vector search will win.
+
+**Graph-support clarification:** The three-out-of-ten threshold should trigger an investigation, not an automatic switch to GraphRAG. Before adding graph features, the team should review the failed questions and decide whether they genuinely require cross-source relationships that passage retrieval cannot handle.
+
+### S2 and S4 review
+
+- **S2 — Learner requests a cited draft:** The story is understandable and has a checkable outcome. During Build, record the question, expected source section, top-three retrieved chunks, and whether the draft's claims are supported. For an unsupported question, check that the system reports insufficient evidence instead of publishing a guide.
+- **S4 — Teammate finds approved guides and history:** The story is understandable and has a checkable outcome. During Build, check with both teammate accounts that they can find the same approved guide, view its citations and review record, and distinguish a revised or stale guide from an older approved version.
+
+These are reviews of the written acceptance criteria only. The application and two-account workflow do not exist yet, so S2 and S4 have not been functionally tested.
+
+### Success-criteria review
+
+The targets are measurable for a Plan-stage project. Freeze the evaluation questions and expected source sections before tuning retrieval, and keep failed cases as well as successful ones. The 8-of-10 retrieval target should be based on whether the returned chunks actually support the question, not simply whether they look related.
+
+**Review outcome:** The written research, architecture choice, S2/S4 stories, and evaluation plan are reasonable for the proposed scope. Their effectiveness remains untested until Build.
+
+**Preparation note:** This review text was prepared with ChatGPT assistance from the repository README and its linked research references. Bryan reviewed and confirmed the content before submission.
+
 ## 7. Actual Plan-stage checks and worked example
 
-| Check | Actual result | Evidence/limit |
-| --- | --- | --- |
+| **Check** | **Actual result** | **Evidence/limit** |
+|---|---|---|
 | Inspect repository before drafting | GitHub contents API reported an empty repository. | No existing implementation or plan was available to review. |
 | Open primary research references | R1, R2, and R3 returned readable content supporting the summaries above. | Direct links in Section 4; this is source reading, not a runtime benchmark. |
 | Check candidate corpus access and permission basis | Python Data Structures and its license page returned readable content. | Section 2 links; documentation license identifies reuse conditions. No corpus ingestion has run. |
-| Walk through one source-backed guide manually | The example below can be traced to the lists section, and its code output was checked during review. | This is a manual example/code check only; no retrieval or generation pipeline was tested. The required peer review by another group member is still pending. |
+| Walk through one source-backed guide manually | The example below can be traced to the lists section, and its code output was checked during review. | This is a manual example/code check only; no retrieval or generation pipeline was tested. The independent peer review has been completed; this check remains a manual example/code check only, not a test of a retrieval or generation pipeline. |
 | Inspect ownership matrix | Four stories have named owners and different reviewers; each teammate owns two. | Section 5. Assignment does not establish completed effort. |
 
 ### Manual walkthrough: example guide G-001
@@ -149,127 +182,8 @@ Review outcome: The approach is reasonable for the planned scope. Its effectiven
 - **Draft explanation:** Use the list's append method to add one item at its end.
 - **Original illustrative example:**
 
-~~~python
+```python
 topics = ["lists"]
 topics.append("dictionaries")
 print(topics)
 # Expected: ['lists', 'dictionaries']
-~~~
-
-- **Manual evidence check:** The cited section describes append as adding an item to the end. This supports the draft's single factual claim.
-- **Execution:** The example was run during review on November 16, 2026. Actual output: `['lists', 'dictionaries']`. This verifies the example's output in that review environment; it does not test the planned ETL, retrieval, or publishing system.
-- **Source check:** The linked Python tutorial section supports the explanation that `append()` adds an item to the end of a list.
-- **Code check:** During review, the example was executed and produced `['lists', 'dictionaries']`. This checks the example's output in that review environment; it does not test the planned ETL, retrieval, or publishing system.
-- **Review status:** G-001 is still **pending approval** because its documentation version and content hash have not been recorded and the independent group approval step has not been completed.
-- **Workflow lesson:** The source URL alone is insufficient for reproducibility; ingestion must also capture version and hash before the guide can be approved.
-
-### Preliminary G-001 review — peer review still pending
-
-- **Review completed:** The source claim and the example's output were checked.
-- **Example reviewed:** G-001 — Adding one item to the end of a Python list.
-- **Source check:** The linked Python tutorial section supports the explanation of `append()`.
-- **Code check:** The example produced `['lists', 'dictionaries']` when executed during review.
-- **Feedback/recommendation:** Record the documentation version and content hash before approval. Keep G-001 pending until the source metadata is complete and the independent review/approval step is recorded.
-- **Reason:** A successful code check alone does not verify source reproducibility or the full ETL, retrieval, review, and publishing workflow.
-- **Peer-review requirement:** Not yet fulfilled. Angelo or another classmate still needs to follow the G-001 source-to-output trace and question one assumption or tradeoff. Their actual feedback must be recorded here.
-- **Group response and decision:** Pending the peer's feedback and the team's discussion.
-- **Documentation changes:** This README now distinguishes the source/code check from the required human peer review. Further changes depend on the peer feedback.
-- **Retest:** The code example was executed during review. No ETL, retrieval, or publishing workflow retest has been performed.
-
-## 8. Balanced work allocation and schedule
-
-Equal work means comparable responsibility, not a claim that equal effort has already occurred. Estimated planning/review effort is six hours per member; implementation estimates will be revised at Build.
-
-| Member | Plan ownership and estimated effort | Build ownership | Cross-review |
-| --- | --- | --- | --- |
-| Angelo Bustamante | Problem/sources (1.5 h), ETL/review workflow (1.5 h), two stories and integration (1 h), review/evidence (2 h) | S1 source ingestion and S3 review controls | Review Bryan's research, evaluation, S2, and S4. |
-| Bryan | Research/approach comparison (1.5 h), success criteria/evaluation (1.5 h), two stories and limitations (1 h), review/evidence (2 h) | S2 retrieval/drafting and S4 shared collection/history | Review Angelo's scope, permissions, ETL, S1, and S3. |
-
-**Proposed milestones, Eastern time:**
-
-- November 16: Read the draft and sources; confirm or revise the topic, ownership, and decisions.
-- November 17 by 10 a.m.: Complete cross-review and record specific findings/corrections with links.
-- November 17 by noon: Verify submission links, status labels, and individual contribution notes.
-- November 17 before 1 p.m.: Each member submits the same shared record/repository plus their own truthful note.
-
-## 9. Limitations, help received, and contribution record
-
-### Limitations
-
-Relevant search results do not guarantee correct answers. Retrieved passages may be incomplete, and generated explanations may contain unsupported claims. Our small Python-only evaluation will not demonstrate effectiveness in other subjects.
-
-The project remains at the Plan stage. No working application, retrieval index, or automated publishing workflow has been built or tested. G-001 received a manual source/code check, but its documentation version, content hash, and independent approval remain pending.
-
-### Help received
-
-ChatGPT assisted with the initial plan, research summaries, work allocation, and wording. Angelo and Bryan contributed reviews recorded in this document. We remain responsible for understanding the design, verifying claims, and accurately reporting completed work.
-
-### Contributions and remaining responsibilities
-
-| Member | Completed contribution | Remaining responsibilities |
-| --- | --- | --- |
-| Angelo Bustamante | Provided the assignment requirements and repository, coordinated the work split, and reviewed Sections 4–6. Evaluated vector retrieval, the keyword baseline, the graph-reconsideration threshold, and publication checks. | Verify and finalize assigned scope, source, and workflow sections; discuss findings with Bryan and record the team’s response. |
-| Bryan | Participated in the documented G-001 source/code review. Checked the explanation against the Python documentation, reviewed the reported output, and identified missing source-version/hash metadata and pending independent approval. | Verify and finalize research, architecture, evaluation criteria, and S2/S4; review source permissions and the workflow; document the code-check environment and respond to Angelo’s findings. |
-
-### Individual submission note — Angelo
-
-I coordinated the shared repository and work allocation and reviewed Sections 4–6. My review found that vector retrieval is a reasonable starting point for the small Python collection, but its value should be tested against keyword search. I also clarified that the three-out-of-ten threshold should prompt investigation of graph support rather than an automatic switch. The system’s effectiveness remains untested until Build.
-
-- **Changed:** Added my review findings and recommendations.
-- **Checked:** Examined the approach comparison and planned checks for source permissions, unsupported answers, factual support, and independent approval.
-- **Next:** Finalize my assigned sections with Bryan and record our response to the review findings.
-
-**Evidence and decision links:**
-- [My review](#simple-review-section-4-6)
-- [Research and decisions](#4-research-and-decision-record)
-- [Evaluation criteria](#6-success-criteria-and-evaluation-plan)
-
-### Individual submission note — Bryan
-
-I participated in the G-001 review, checking the explanation against the linked Python documentation and reviewing the example’s output. The recorded output was `['lists', 'dictionaries']`. I identified that the documentation version and content hash were missing, so the example should remain pending approval. This check supports the example only; it does not demonstrate a working ETL or RAG system.
-
-- **Changed:** Added G-001 review findings and documented the remaining metadata and approval gaps.
-- **Checked:** Compared the explanation with its cited source and reviewed the example’s output.
-- **Next:** Document the execution environment, finalize my assigned research and evaluation sections, and discuss Angelo’s review findings.
-
-**Evidence and decision links:**
-- [G-001 review](#preliminary-g-001-review--peer-review-still-pending)
-- [Research and decisions](#4-research-and-decision-record)
-- [Evaluation criteria](#6-success-criteria-and-evaluation-plan)
-- [Assigned stories](#5-four-checkable-stories-and-ownership)
-
-## 10. Changed / checked / next
-
-### Changed
-
-- Created the shared plan with a defined reader, permitted sources, ETL workflow, research comparison, four checkable stories, and assigned owners and reviewers.
-- Added Angelo’s review of Sections 4–6 and Bryan’s documented G-001 source/code review.
-- Updated Section 9 with individual contributions, remaining responsibilities, and AI assistance.
-- Removed the duplicate file so README.md is the single shared record.
-
-### Checked
-
-- Preparation checks covered the research references, Python documentation, source permission basis, and story ownership.
-- Angelo reviewed the retrieval approach and evaluation criteria. His findings emphasized testing vectors against keyword search and investigating graph support rather than switching automatically.
-- Bryan’s documented G-001 review checked the explanation against its source and reviewed the recorded output: `['lists', 'dictionaries']`.
-- G-001 remains pending approval because source-version/hash metadata and independent approval are incomplete. Its execution environment still needs to be documented.
-- No application, ETL pipeline, retrieval index, or automated publishing workflow has been tested.
-
-**Evidence:**
-- [Angelo’s review](#simple-review-section-4-6)
-- [G-001 checks and review](#7-actual-plan-stage-checks-and-worked-example)
-- [Individual contributions](#9-limitations-help-received-and-contribution-record)
-
-### Next
-
-- Angelo and Bryan will finish verifying their assigned sections, discuss the review findings, and record their agreement or revisions.
-- Add the date to Angelo’s review and document who executed G-001 and the Python version/environment used.
-- Keep G-001’s pending approval separate from the status of the overall Plan submission.
-- At Build, implement the scoped workflow and run the planned evaluation.
-- At Improve, document a real peer-requested change and the relevant retest.
-
-### Submission
-
-Each member will submit this shared README and repository link, their own contribution note, relevant research/decision links, and their individual changed/checked/next note from Section 9.
-
-**Current status:** Plan stage — not yet built. No demo exists.
